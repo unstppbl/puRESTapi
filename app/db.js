@@ -9,7 +9,6 @@ const dbconf = {
   database: config.get('database.database'),
 };
 
-// POOL IMPLEMENTATION
 const pool = new pg.Pool(dbconf);
 
 pool.on('error', (err, client) => {
@@ -28,35 +27,7 @@ function executeQuery(query, cb) {
       cb(null, err);
     });
 }
-// const test = async () => {
-//   const res = await pool.query('SELECT * FROM hosts').catch((err) => {
-//     console.log(`ERROR IN EXECUTING QUERY: ${err}`);
-//     process.exit();
-//   });
-//   console.log('test');
-//   console.log(res.rows);
-//   await pool.end();
-// };
-// test();
-// executeQuery('SELECT * FROM hosts', (err, res) => console.log(err));
+
 module.exports = {
   executeQuery,
 };
-
-// CLIENT IMPLEMENTATION
-// const connectionString = `pg://${dbconf.user}:${dbconf.password}@${dbconf.host}:${dbconf.port}/${dbconf.database}`;
-// const client = new pg.Client(connectionString);
-
-// const test = async () => {
-//   await client.connect();
-//   const res = await client.query('SELECT * FROM hosts').catch((err) => {
-//     console.log(`ERROR IN EXECUTING QUERY: ${err}`);
-//     process.exit();
-//   });
-//   console.log('test');
-//   console.log(res.rows);
-//   await client.end();
-// };
-// test();
-
-// module.exports = client;
